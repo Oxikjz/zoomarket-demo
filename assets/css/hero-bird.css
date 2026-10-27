@@ -1,0 +1,35 @@
+/* Первый экран с птицей. Птица взята из ролика-образца: 106 вырезанных кадров (24 к/с) собраны в анимированный
+   hero-bird.webp, который играет один раз и остаётся на последнем кадре (птица села). Кадр 1800x1019 (кадры ролика увеличены нейросетью Real-ESRGAN x4), птица внутри него
+   занимает x 33%..66%, y 12%..66%. Размер и положение рамки считаются от ширины окна, чтобы птица садилась справа от текста. */
+.hero{position:relative;overflow:clip;--sw:clamp(860px,88vw,1300px)}
+/* у героя в style.css своя маска и проявление под видео: без видео они не нужны */
+.hero-media{-webkit-mask-image:none;mask-image:none;opacity:1!important;transition:none!important}
+.hero-media::before,.hero-media::after{display:none}
+
+.bird-stage{position:absolute;z-index:1;pointer-events:none;width:var(--sw);aspect-ratio:1800/1019;
+  left:calc(79vw - var(--sw)*.495);top:calc(var(--sw)*-.03)}
+.bird-stage img{position:absolute;inset:0;width:100%;height:100%;display:block}
+.bird-stage .bird-still{display:none}
+/* мягкое голубое свечение под севшей птицей */
+.bird-stage::before{content:"";position:absolute;left:22%;top:6%;width:56%;height:78%;
+  background:radial-gradient(closest-side,rgba(110,150,225,.28),rgba(110,150,225,0));opacity:0}
+html.loaded .bird-stage::before{animation:bird-glow 1.4s ease-out 3.2s forwards}
+@keyframes bird-glow{to{opacity:1}}
+
+/* Текст проявляется, когда птица уже на подлёте к посадке (в ролике так же) */
+.hero-text{z-index:2}
+html.loaded .hero-text>*{animation:hero-in .8s cubic-bezier(.23,1,.32,1) both}
+html.loaded .hero-text h1{animation-delay:2.3s}
+html.loaded .hero-text .hero-sub{animation-delay:2.5s}
+html.loaded .hero-text .hero-cta{animation-delay:2.7s}
+@keyframes hero-in{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+
+@media (max-width:900px){
+  .hero{--sw:820px}
+  .bird-stage{left:calc(50vw - var(--sw)*.495);top:calc(var(--sw)*-.01)}
+}
+@media (prefers-reduced-motion:reduce){
+  .bird-stage .bird-anim{display:none}.bird-stage .bird-still{display:block}
+  html.loaded .hero-text>*{animation:none}
+  .bird-stage::before{opacity:1;animation:none}
+}

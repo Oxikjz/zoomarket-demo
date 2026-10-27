@@ -1,0 +1,246 @@
+<!doctype html>
+<!--
+  ГЛАВНАЯ. Разделы сверху вниз: шапка + меню категорий → первый экран (видео hero.mp4)
+  → «Наши питомцы» (карточки разделов) → «Зоомаркет Демо рядом с домом» (#about) → блок
+  «Только официальные поставки» → бонусная программа (#bonus) и «Проверьте наличие»
+  → «Наши магазины» (#stores-section, карточки рисует site.js из ZOO.stores) → подвал.
+  Тексты меняются прямо здесь. Скрипты: hero-video.js (видео), smooth.js (плавность),
+  search.js (подсказки поиска), site.js (магазины, общее), pawwalk.js (следы лап на фоне).
+  Версии ?v=N у css/js повышать при каждой правке, иначе браузеры покажут старое.
+  Подробно — README.md.
+-->
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Зоомаркет Демо: зоомаркет в Новограде</title>
+<meta name="description" content="Зоомаркет Демо: сеть зоомагазинов в Новограде. Корма, лакомства, наполнители и аксессуары для кошек, собак, грызунов, птиц и рыбок. Наличие и цены в каждом магазине.">
+<meta name="robots" content="index, follow">
+<meta name="theme-color" content="#3f5a22">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/img/icon-32.png?v=1">
+<link rel="icon" type="image/png" sizes="192x192" href="/assets/img/icon-192.png?v=1">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png?v=1">
+<link rel="preload" href="assets/fonts/nunito-cyr.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/css/style.css?v=68">
+<link rel="stylesheet" href="assets/css/pages.css?v=3">
+</head>
+<body>
+
+<div class="top">
+  <div class="wrap">
+    <span>Сеть зоомагазинов в Новограде</span>
+    <div class="top-links"><a href="#stores-section">Адреса магазинов</a><a href="#bonus">Бонусная программа</a></div>
+  </div>
+</div>
+
+<!-- ===== ШАПКА: логотип, меню, поиск (подсказки — search.js), мобильное меню ===== -->
+<header class="header">
+  <div class="wrap">
+    <a class="brand" href="index.html" aria-label="Зоомаркет Демо, на главную">
+      <img src="assets/img/emblem.png" alt="">
+      <div class="brand-name"><b>ЗООМАРКЕТ</b><span>демо</span></div>
+    </a>
+    <nav class="nav">
+      <a href="catalog.html">Каталог</a>
+      <a href="#bonus">Бонусы</a>
+      <a href="#stores-section">Магазины</a>
+      <a href="about.html">О нас</a>
+      <a href="vacancies.html">Вакансии</a>
+    </nav>
+    <form class="search" action="catalog.html" role="search">
+      <input name="q" type="search" placeholder="Поиск: корм, наполнитель, лакомство…" aria-label="Поиск товаров">
+      <button aria-label="Найти"><svg><use href="assets/icons.svg?v=64#search"/></svg></button>
+    </form>
+    <button class="burger" aria-label="Меню"><svg><use href="assets/icons.svg?v=64#menu"/></svg></button>
+  </div>
+  <div class="wrap mobile-search">
+    <form class="search" action="catalog.html" role="search">
+      <input name="q" type="search" placeholder="Поиск товаров…" aria-label="Поиск товаров">
+      <button aria-label="Найти"><svg><use href="assets/icons.svg?v=64#search"/></svg></button>
+    </form>
+  </div>
+  <div class="wrap drawer">
+    <a href="catalog.html">Каталог</a><a href="#bonus">Бонусная программа</a><a href="#stores-section">Магазины</a><a href="#about">О нас</a>
+  </div>
+</header>
+  <!-- ===== зелёная строка разделов-питомцев (ссылки в каталог) ===== -->
+  <nav class="catbar" aria-label="Категории">
+    <div class="wrap">
+      <a href="catalog.html?animal=cats">Кошки</a><a href="catalog.html?animal=dogs">Собаки</a><a href="catalog.html?animal=rodents">Грызуны</a><a href="catalog.html?animal=birds">Птицы</a><a href="catalog.html?animal=fish">Рыбки</a><a href="catalog.html?animal=reptiles">Рептилии</a><a href="catalog.html?animal=farm">Для фермы</a>
+    </div>
+  </nav>
+
+<main>
+  <!-- ===== ПЕРВЫЙ ЭКРАН: заголовок, подзаголовок, кнопки, видео (hero-video.js) ===== -->
+  <section class="hero">
+    <div class="wrap hero-wrap">
+      <div class="hero-card">
+        <div class="hero-text">
+          <h1>Забота о&nbsp;каждом <em>хвостике</em></h1>
+          <p class="hero-sub">Пространство заботы и&nbsp;любви к&nbsp;животным. Корма, лакомства и&nbsp;всё для питомцев в&nbsp;наших магазинах по&nbsp;всему Новограду.</p>
+          <div class="hero-cta">
+            <a class="btn btn-primary" href="catalog.html">Открыть каталог <svg><use href="assets/icons.svg?v=64#arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#stores-section">Адреса магазинов</a>
+          </div>
+        </div>
+        <div class="hero-media">
+          <img class="hero-photo" src="assets/img/hero-photo.webp" alt="Кошка на диване" fetchpriority="high">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== «НАШИ ПИТОМЦЫ»: карточки разделов → каталог с фильтром ?animal= ===== -->
+  <section class="section pets">
+    <div class="bg-decor" aria-hidden="true"><img class="bgl p2 blur" src="assets/img/leaves/leaf5.webp" alt=""><img class="bgl p4 blur" src="assets/img/leaves/leaf10.webp" alt=""><i class="blob g" style="left:-260px;top:-60px"></i><i class="blob s" style="right:-300px;top:380px"></i></div>
+    <div class="wrap">
+      <div class="section-head center">
+        <h2><img class="sprig" src="assets/img/sprig-real.webp" alt="" aria-hidden="true">Наши питомцы<img class="sprig" src="assets/img/sprig-real.webp" alt="" aria-hidden="true"></h2>
+      </div>
+      <div class="cats">
+        <a class="cat" href="catalog.html?animal=cats">
+          <div class="cat-img"><img src="assets/img/cat-cats.webp?v=64" alt="" loading="lazy" style="object-position:50% 4%"></div>
+          <div class="cat-body"><h3>Кошки</h3><ul><li>Корма</li><li>Наполнители</li><li>Лакомства</li><li>Игрушки</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat" href="catalog.html?animal=dogs">
+          <div class="cat-img"><img src="assets/img/cat-dogs.webp?v=64" alt="" loading="lazy" style="object-position:50% 6%"></div>
+          <div class="cat-body"><h3>Собаки</h3><ul><li>Корма</li><li>Лакомства</li><li>Амуниция</li><li>Витамины</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat" href="catalog.html?animal=rodents">
+          <div class="cat-img"><img src="assets/img/cat-rodents.webp?v=64" alt="" loading="lazy" style="object-position:50% 18%"></div>
+          <div class="cat-body"><h3>Грызуны</h3><ul><li>Корма</li><li>Клетки</li><li>Наполнители</li><li>Лакомства</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat" href="catalog.html?animal=birds">
+          <div class="cat-img"><img src="assets/img/cat-birds.webp?v=64" alt="" loading="lazy" style="object-position:50% 8%"></div>
+          <div class="cat-body"><h3>Птицы</h3><ul><li>Корма</li><li>Клетки</li><li>Игрушки</li><li>Аксессуары</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat" href="catalog.html?animal=fish">
+          <div class="cat-img"><img src="assets/img/cat-fish.webp?v=64" alt="" loading="lazy"></div>
+          <div class="cat-body"><h3>Рыбки</h3><ul><li>Корма</li><li>Аксессуары</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat" href="catalog.html?animal=reptiles">
+          <div class="cat-img"><img src="assets/img/cat-reptiles.webp?v=64" alt="" loading="lazy" style="object-position:50% 42%"></div>
+          <div class="cat-body"><h3>Рептилии</h3><ul><li>Корма для черепах</li><li>Аксессуары</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat" href="catalog.html?animal=farm">
+          <div class="cat-img"><img src="assets/img/cat-farm.webp?v=64" alt="" loading="lazy"></div>
+          <div class="cat-body"><h3>Для фермы</h3><ul><li>Для сельских животных</li></ul><span class="cat-go">Смотреть <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+        <a class="cat cat-all" href="catalog.html">
+          <div class="cat-body"><svg class="cat-all-ico"><use href="assets/icons.svg?v=64#paw"/></svg><h3>Весь каталог</h3><p>Больше 7000 товаров с ценами и наличием в каждом магазине</p><span class="cat-go">Открыть каталог <svg><use href="assets/icons.svg?v=64#arrow"/></svg></span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ===== «ЗООМАРКЕТ ДЕМО РЯДОМ С ДОМОМ»: текст и цифры ===== -->
+  <section class="section deco-about" id="about">
+    <div class="bg-decor" aria-hidden="true"><img class="bgl a2 blur" src="assets/img/leaves/leaf6.webp" alt=""><i class="blob g" style="right:-200px;top:-200px"></i></div>
+    <div class="wrap about">
+      <div class="about-text">
+        <h2>Зоомаркет Демо рядом с домом</h2>
+        <p>Мы собрали в своих магазинах корма, лакомства, наполнители и уход для кошек, собак, грызунов, птиц, рыбок и рептилий. Продавцы помогут подобрать корм под возраст и особенности питомца.</p>
+      </div>
+      <dl class="facts">
+        <div><dt>7000+</dt><dd>товаров в каталоге</dd></div>
+                <div><dt>7</dt><dd>разделов для разных питомцев</dd></div>
+      </dl>
+    </div>
+  </section>
+
+
+  <!-- ===== «ТОЛЬКО ОФИЦИАЛЬНЫЕ ПОСТАВКИ» (стили — pages.css) ===== -->
+  <section class="trust-sec"><div class="wrap"><div class="trust"><div class="trust-ico"><svg><use href="assets/icons.svg?v=64#shield"/></svg></div><div><h3>Только официальные поставки</h3><p>«Зоомаркет Демо» работает только с&nbsp;официальными дистрибьюторами ведущих марок. Все товары в&nbsp;наших магазинах сертифицированы.</p></div><a class="btn btn-primary" href="catalog.html">Каталог <svg><use href="assets/icons.svg?v=64#arrow"/></svg></a></div></div></section>
+  <!-- ===== БОНУСНАЯ ПРОГРАММА + «ПРОВЕРЬТЕ НАЛИЧИЕ ДО ВИЗИТА» ===== -->
+  <section class="section deco-promo" id="bonus">
+    <div class="bg-decor" aria-hidden="true"><img class="bgl b1 blur" src="assets/img/leaves/leaf1.webp" alt=""><i class="blob s" style="left:-320px;top:120px"></i><i class="blob g" style="right:-280px;top:-260px"></i></div>
+    <div class="wrap promo">
+      <div class="bonus">
+        <div>
+          <h2>Бонусная программа</h2>
+          <!-- Условия (% начисления, лимит, приветственные баллы) подставляются сами из учётной системы — site.js ZooBonus / data/bonus.json -->
+          <p>Покупайте для любимцев и копите бонусы. Бонусная карта действует во всех магазинах «Зоомаркет Демо».</p>
+          <ul>
+            <li><svg><use href="assets/icons.svg?v=64#check"/></svg><span data-bonus="earn">Бонусы с каждой покупки</span></li>
+            <li><svg><use href="assets/icons.svg?v=64#check"/></svg><span data-bonus="max">Оплачивайте бонусами часть покупки</span></li>
+            <li hidden><svg><use href="assets/icons.svg?v=64#check"/></svg><span data-bonus="welcome"></span></li>
+            <li><svg><use href="assets/icons.svg?v=64#check"/></svg>Карту оформят в любом магазине</li>
+          </ul>
+          <a class="btn btn-light" href="#stores-section">Оформить в магазине</a>
+        </div>
+        <div class="card-bonus kraft" aria-hidden="true">
+          <img class="kc-leaf tr" src="assets/img/leaves/leaf3.webp" alt="">
+          <img class="kc-leaf br" src="assets/img/leaves/leaf7.webp" alt="">
+          <img class="kc-leaf br2" src="assets/img/leaves/leaf2.webp" alt="">
+          <div class="kc-body">
+            <img class="kc-emblem" src="assets/img/emblem.png" alt="">
+            <div class="kc-text"><b>ЗООМАРКЕТ</b><small>бонусная карта</small></div>
+          </div>
+        </div>
+      </div>
+      <div class="stock-card">
+        <div class="stock-text">
+          <h2>Проверьте наличие до визита</h2>
+          <p>В каталоге видно, в каком магазине есть нужный корм. Не придётся ездить зря.</p>
+          <a class="btn btn-primary" href="catalog.html">Проверить наличие <svg><use href="assets/icons.svg?v=64#arrow"/></svg></a>
+        </div>
+        <div class="stock-photo">
+          <img src="assets/img/rabbit.jpg" alt="" loading="lazy">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== «НАШИ МАГАЗИНЫ»: карточки рисует site.js из ZOO.stores ===== -->
+  <section class="section band" id="stores-section">
+    <img class="paws" src="assets/img/paws.svg" alt="" aria-hidden="true">
+    <div class="wrap">
+      <div class="section-head center">
+        <h2><img class="sprig" src="assets/img/sprig-real.webp" alt="" aria-hidden="true">Наши магазины<img class="sprig" src="assets/img/sprig-real.webp" alt="" aria-hidden="true"></h2>
+      </div>
+      <div class="stores" id="stores"></div>
+    </div>
+  </section>
+</main>
+
+<!-- ===== ПОДВАЛ: ссылки, контакты, реквизиты ИП, правовые страницы ===== -->
+<footer class="footer">
+  <img class="f-leaves l" src="assets/img/branch-corner.webp" alt="" aria-hidden="true">
+  <img class="f-leaves r" src="assets/img/branch-corner.webp" alt="" aria-hidden="true">
+  <div class="wrap">
+    <div class="footer-grid">
+      <div>
+        <div class="f-brand"><div class="em"><img src="assets/img/emblem.png" alt=""></div><div><b>ЗООМАРКЕТ</b><span>демо</span></div></div>
+        <p>Пространство заботы и любви к животным. Сеть зоомагазинов в Новограде.</p>
+      </div>
+      <div>
+        <h4>Покупателям</h4>
+        <ul><li><a href="catalog.html">Каталог</a></li><li><a href="#bonus">Бонусная программа</a></li><li><a href="#stores-section">Адреса магазинов</a></li><li><a href="about.html">О компании</a></li><li><a href="vacancies.html">Вакансии</a></li></ul>
+      </div>
+      <div>
+        <h4>Каталог</h4>
+        <ul><li><a href="catalog.html?animal=cats">Кошки</a></li><li><a href="catalog.html?animal=dogs">Собаки</a></li><li><a href="catalog.html?animal=rodents">Грызуны</a></li><li><a href="catalog.html?animal=birds">Птицы</a></li><li><a href="catalog.html?animal=fish">Рыбки</a></li><li><a href="catalog.html?animal=reptiles">Рептилии</a></li></ul>
+      </div>
+      <div>
+        <h4>Контакты</h4>
+        <ul><li><a href="mailto:demo@example.com">demo@example.com</a></li><li><a href="#stores-section">Телефоны магазинов</a></li><li>Магазины в разных районах Новограда</li></ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 «Зоомаркет Демо». ИП Иванов Иван Иванович (Садовая,&nbsp;25; Парковая,&nbsp;1), ОГРНИП&nbsp;300000000000001, ИНН&nbsp;000000000001.<br>ИП Петрова Мария Сергеевна (Речная,&nbsp;28; Центральная,&nbsp;122; Луговой,&nbsp;34/2), ОГРНИП&nbsp;300000000000002, ИНН&nbsp;000000000002.<br>Информация на сайте <a href="legal.html">не является публичной офертой</a>.</span>
+      <a href="privacy.html">Политика конфиденциальности</a>
+    </div>
+  </div>
+</footer>
+
+<script src="assets/js/hero-video.js?v=64"></script>
+<script src="assets/js/vendor/lenis.min.js"></script>
+<script src="assets/js/smooth.js?v=64"></script>
+<script src="assets/js/search.js?v=64"></script>
+<script src="assets/js/site.js?v=74"></script>
+<script src="assets/js/pawwalk.js?v=64"></script>
+</body>
+</html>
